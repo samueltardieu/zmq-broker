@@ -23,6 +23,7 @@ class Request:
         self.deadline = None
         self.timeout = timeout
         self.tries = tries
+        self.id = uuid.uuid1().bytes
 
     def update_deadline(self):
         """Update the request deadline if a timeout has been specified."""
@@ -32,10 +33,9 @@ class Request:
             self.tries -= 1
 
     def make_request(self):
-        """Return a request prepended by a unique ID to be sent to a worker.
+        """Return a request prepended by its unique ID to be sent to a worker.
         This also updates the request deadline."""
         self.update_deadline()
-        self.id = uuid.uuid1().bytes
         return [self.id] + self.content
 
     def expired(self):
