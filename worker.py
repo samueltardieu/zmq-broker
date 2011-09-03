@@ -6,7 +6,7 @@
 
 import functools, zmq
 
-class Worker:
+class Worker(object):
     """Worker class. One of `process` or `process_multipart` must
     be overriden for this class to be usable."""
 
